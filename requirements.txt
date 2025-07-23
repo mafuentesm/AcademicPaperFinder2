@@ -1,0 +1,5 @@
+requests
+python-dotenv
+feedparser
+biopython
+google-search-results #Para API de Google Scholar
