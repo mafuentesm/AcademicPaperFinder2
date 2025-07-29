@@ -3,3 +3,4 @@ python-dotenv
 feedparser
 biopython
 google-search-results #Para API de Google Scholar
+beautifulsoup4 #Para hacer Parsing

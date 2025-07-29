@@ -1,7 +1,6 @@
 import requests
 import re
 from typing import List, Dict, Optional, Type
-from abc import ABC, abstractmethod
 import os
 import time
 import feedparser
@@ -9,14 +8,17 @@ from datetime import datetime
 from Bio import Entrez
 import html
 import logging
-from serpapi import GoogleSearch
+from bs4 import BeautifulSoup # Para hacer Parsing
+
+from abstract_strategy import SearchStrategy
+from strategies.google_strategy import GoogleScholarSearchStrategy
+from strategies.scopus_strategy import ScopusSearchStrategy
+from strategies.wos_strategy import WebOfScienceSearchStrategy
+# ------ PubMedStrategy está en el módulo actual ------
+from strategies.ssrn_strategy import SSRNSearchStrategy
+from strategies.jstor_strategy import  JSTORSearchStrategy
 
 logger = logging.getLogger(__name__)
-
-class SearchStrategy(ABC):
-    @abstractmethod
-    def search_papers(self, query: str, number_of_abstracts: int = 25) -> Optional[List[Dict]]:
-        pass
 
 
 class SemanticSearchStrategy(SearchStrategy):
@@ -481,32 +483,6 @@ class ScopusSearchStrategy(SearchStrategy):
             return None
 
         return papers
-
-class GoogleScholarSearchStrategy(SearchStrategy):
-    def __init__(self):
-        self.base_url = "https://scholar.google.com/scholar"
-        self.api_key = "LLAVE_API_SerpAPI"
-
-    def search_papers(self, query: str, number_of_abstracts: int = 25) -> Optional[List[Dict]]:
-        params = {
-        "q": query
-        }
-
-        papers = []
-        try:
-            response = requests.get(self.base_url, params=params)
-            if response.status_code == 200:
-    
-    pass
-
-class WebOfScienceSearchStrategy(SearchStrategy):
-    pass
-
-class SSRNSearchStrategy(SearchStrategy):
-    pass
-
-class JSTORSearchStrategy(SearchStrategy):
-    pass
 
 
 
