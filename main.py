@@ -22,7 +22,7 @@ def main():
 
     # Instancia del Helper
     helper = SearchHelper()
-    strategy_keys = ["pubmed"] # Prueba con busqueda en foro EntrezPubMed; agregar otros
+    strategy_keys = ["jstor"] # Prueba con busqueda en foro EntrezPubMed; agregar otros
     helper.set_sequential_combined_strategy(strategy_keys)
     papers = helper.execute(query, 10) # 10 papers por sitio
 
@@ -32,9 +32,26 @@ def main():
     print(f"{len(papers)} papers encontrados :)")
 
 
+# if __name__ == "__main__":
+#     try:
+#         main()
+#     except Exception as e:
+#         print(f"\n Error inesperado: {e}")
+#         sys.exit(1)
+
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print(f"\n Error inesperado: {e}")
-        sys.exit(1)
+    strategy = JSTORSearchStrategy()
+    query = "climate change"
+
+    papers = strategy.search_papers(query=query, number_of_abstracts=5)
+
+    if papers:
+        print(f"{len(papers)} papers found:\n")
+        for paper in papers:
+            print(f"Title: {paper['title']}")
+            print(f"Authors: {paper['authors']}")
+            print(f"Year: {paper['year']}")
+            print(f"URL: {paper['url']}")
+            print("-" * 40)
+    else:
+        print("No papers found.")
