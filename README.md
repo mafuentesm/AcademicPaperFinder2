@@ -1,14 +1,23 @@
 # Academic Paper Finder
 
-This script provides an interface to search for academic papers from multiple sources including IEEE Xplore, arXiv, PubMed, CrossRef, and more. It uses a sequential combined search strategy to go through the strategies one by one until the requested number of paper abstracts are found.
-
-Read for more information:
+El siguiente repositorio es una extensión basada en el código publicado en el siguiente artículo:
 https://medium.com/@zakaria.hamane1/how-to-automate-academic-paper-searches-with-python-part-i-65bd1c837f4c
+
+A definición del autor original del repositorio:
+"This script provides an interface to search for academic papers from multiple sources including IEEE Xplore, arXiv, PubMed, CrossRef, and more. It uses a sequential combined search strategy to go through the strategies one by one until the requested number of paper abstracts are found."
+
+En esta versión, se busca agregar estrategias asociadas a fuentes nuevas, siendo el objetivo final:
+- Google Scholar
+- Scopus ✅
+- Web of Science
+- PubMed ✅
+- SSRN
+- JSTOR
 
 ## Setup
 
-1. Clone the repository to your local machine.
-2. Install the required Python packages using the `requirements.txt` file:
+1. Clonar el repositorio en la máquina local
+2. Instalar los Python packages necesarios, localizados en `requirements.txt`:
 ```
 pip install -r requirements.txt
 ```
@@ -22,9 +31,10 @@ Edit `.env` with your actual credentials.
 
 ## Usage
 
-Initialize the `SearchHelper` with the desired search strategies in a preferred order. Then, execute a search with a query and the number of abstracts you wish to retrieve.
+El `SearchHelper` puede ser ejecutado desde `main.py`. Este último está compuesto por dos arguementos clave: la solicitud hacia la
+página, o `query`; y la cantidad de abstracts por obtener. Se deja un código de ejemplo:
 
-Example:
+Ejemplo:
 ```python
 from search_helper import SearchHelper
 
